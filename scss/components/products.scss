@@ -1,0 +1,16 @@
+.products-list {
+  list-style: none;
+  margin-top: 0;
+  padding: 0;
+  display: grid;
+  grid-gap: 50px 15px;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.products-list__item {
+  cursor: move;
+}
+
+.products-list__image {
+  width: 100%;
+}
