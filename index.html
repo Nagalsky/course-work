@@ -28,15 +28,20 @@
           <ul class="products-list" id="products-list"></ul>
         </div>
 
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebarCart">
           <h2>Cart:</h2>
 
-          <h5><span>0</span>: Products</h5>
-          <h5>Total: $<span>0</span></h5>
+          <ul class="unstyled" id="sidebarCartList">
+            <li>Products: <span id="sidebarCartQty">0</span></li>
+            <li>Total: $<span id="sidebarCartTotalPrice">0</span></li>
+          </ul>
+
+          <a href="#">Checkout</a>
         </aside>
       </div>
     </section>
 
     <script src="js/request.js"></script>
+    <script src="js/addToCart.js"></script>
   </body>
 </html>
