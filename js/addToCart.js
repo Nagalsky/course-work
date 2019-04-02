@@ -60,7 +60,7 @@
   }
 
   productsList.addEventListener('click', event => {
-    var target = event.target
+    const target = event.target
 
     if (target.classList.contains('products-list__btn')) {
       var targetId = target.dataset.id
