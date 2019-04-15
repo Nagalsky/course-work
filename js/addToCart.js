@@ -9,10 +9,10 @@
   const sidebarCartList = document.querySelector('#sidebarCartList')
   const sidebarCartQty = document.querySelector('#sidebarCartQty')
   const sidebarCartTotalPrice = document.querySelector('#sidebarCartTotalPrice')
-  const basket = []
+  const basket = JSON.parse(localStorage.getItem('basket')) || []
   let products = []
 
-  myShopData.loadData(url, 2500).then(data => {
+  myShopData.loadData(url, 500).then(data => {
     products = data
     preloader ? preloader.classList.remove('preloader--is-active') : preloader
     var productItem = data
@@ -45,7 +45,11 @@
       })
     }
 
-    const total = basket.reduce(
+    localStorage.setItem('basket', JSON.stringify(basket))
+  }
+
+  const getBasketTotal = () => {
+    return basket.reduce(
       (acc, cur) => {
         return {
           price: acc.price + cur.price * cur.count,
@@ -54,9 +58,6 @@
       },
       { price: 0, count: 0 }
     )
-
-    sidebarCartQty.innerHTML = total.count
-    sidebarCartTotalPrice.innerHTML = total.price
   }
 
   productsList.addEventListener('click', event => {
@@ -68,7 +69,16 @@
       if (product) {
         const { id, price, title } = product
         addToCart({ id, price, title })
+        refreshBasket()
       }
     }
   })
+
+  const refreshBasket = () => {
+    const res = getBasketTotal()
+    sidebarCartQty.innerHTML = res.count
+    sidebarCartTotalPrice.innerHTML = res.price
+  }
+
+  refreshBasket()
 })()
